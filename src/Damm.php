@@ -1,13 +1,14 @@
 <?php
 namespace Choval;
 
-class Damm {
+class Damm
+{
 
 
   /**
    * Quasigroup table
    */
-  const TABLE = [
+    const TABLE = [
     '0317598642',
     '7092154863',
     '4206871359',
@@ -21,36 +22,34 @@ class Damm {
   ];
 
 
-  /**
-   * Calculates the check digit
-   */
-  public static function digit(string $number) : int {
-    if(!is_numeric($number)) {
-      throw new \Exception("Non valid number ($number)");
+    /**
+     * Calculates the check digit
+     */
+    public static function digit(string $number) : int
+    {
+        if (!is_numeric($number)) {
+            throw new \Exception("Non valid number ($number)");
+        }
+        $len = strlen($number);
+        $row = 0;
+        for ($i=0;$i<$len;$i++) {
+            $row = static::TABLE[$row][ $number[$i] ];
+        }
+        return $row;
     }
-    $len = strlen($number);
-    $row = 0;
-    for($i=0;$i<$len;$i++) {
-      $row = static::TABLE[$row][ $number[$i] ];
+
+
+    /**
+     * Validates a check digit
+     */
+    public static function valid(string $number, int $digit=null) : bool
+    {
+        if (!is_null($digit)) {
+            if (strlen($digit) != 1) {
+                throw new \Exception("Non valid digit ($digit)");
+            }
+            $number .= $digit;
+        }
+        return !(static::digit($number));
     }
-    return $row;
-  }
-
-
-  /**
-   * Validates a check digit
-   */
-  public static function valid(string $number, int $digit=NULL) : bool {
-    if(!is_null($digit)) {
-      if(strlen($digit) != 1) {
-        throw new \Exception("Non valid digit ($digit)");
-      }
-      $number .= $digit;
-    }
-    return !(static::digit($number));
-  }
-
-
 }
-
-
