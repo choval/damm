@@ -25,8 +25,8 @@ damm_valid(string $number[, string $digit]) : bool
 Examples:
 
 ```php
-use function Choval\damm;
-use function Choval\damm_check;
+use function Choval\damm_digit;
+use function Choval\damm_valid;
 
 echo damm_digit(572);
 // 4
