@@ -15,19 +15,17 @@ composer require choval/damm
 
 ## Usage
 
-Procedural:
-
 ```php
 damm_digit(string $number) : int
 damm_valid(string $number[, string $digit]) : bool
 ```
 
+Both functions take a string as parameter to allow numbers larger than `PHP_INT_MAX`.  
+They still have to be numeric.
+
 Examples:
 
 ```php
-use function Choval\damm_digit;
-use function Choval\damm_valid;
-
 echo damm_digit(572);
 // 4
 
